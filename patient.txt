@@ -1,0 +1,31 @@
+Patient Information
+  Name: John Smith
+  Birth Date: 04/04/1975
+  Gender: Male
+  Home Phone: 444-444-4444
+  Marital Status: Divorced
+  Race: Caucasian
+  Language: English
+  Emp. Status: Full-time
+Problems
+	Atherosclerosis
+	Coronary artery disease
+History
+	One heart attack
+Medications
+  Beta-blockers
+  Low-dose aspirin daily
+  Statins
+Vital Signs
+  Ht: 70 in.
+  Wt: 140 lbs
+  T: 98.0 deg F. 
+  T site: oral
+  P: 72
+  Rhythm: regular
+  R: 16
+  BP: 158/90
+Physical Exam
+	Angina
+	Tightness in back and jaw
+	Shortness of breath
