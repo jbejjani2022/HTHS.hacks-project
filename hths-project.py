@@ -4,9 +4,11 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout          #Imports, used kivy for python GUI
 from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import ScreenManager, Screen
 import os
 kivy.require("1.11.1")
+info = ""
 
 class LoginPage(GridLayout):            #login page code start
     def __init__(self, **kwargs):
@@ -71,7 +73,6 @@ class PatientPage(GridLayout):
 
         self.PatientFileSubmit = Button(text="Scan File")
         self.PatientFileSubmit.bind(on_press=self.submit_patient_file)       #button login submission
-        self.add_widget(Label())
         self.add_widget(self.PatientFileSubmit)
 
 
@@ -79,9 +80,19 @@ class PatientPage(GridLayout):
         with open("patient.txt", "r") as patient_file_temp:
             patient_file_contents = patient_file_temp.read().lower()
             if patient_file_contents.find("coronary artery disease"):
-                self.add_widget(label(text=("I have seen the patient has Coronary Artery Disease, I advise the patient to "
-                                            "quit smoking, reduce/stop consumption of alcohol, maintain healthy weight and "
-                                            "diet, regular exercise, and come back every 6 months for checkup.")))
+                info = "[b]I have seen the patient has Coronary Artery Disease,\n I advise the patient to quit smoking,\n reduce/stop consumption of alcohol, maintain healthy weight and\n diet, regular exercise, and come back every 6 months for checkup.[/b]"
+                Risk_ID.screen_manager.current = "Info"
+
+class InfoPage(GridLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.cols = 1
+        self.info = Label(halign="center", valign="top", font_size=20, markup=True, text="[b]I have seen the patient has Coronary Artery Disease,\n I advise the patient to quit smoking,\n reduce/stop consumption of alcohol, maintain healthy weight and\n diet, regular exercise, and come back every 6 months for checkup.[/b]")
+        self.add_widget(self.info)
+
+    def update_info(self, info):
+        self.info.text = info
+
 
 class DoctorApp(App):
     def build(self):
@@ -100,6 +111,11 @@ class DoctorApp(App):
         self.patient_page = PatientPage()
         screen = Screen(name="Patient")
         screen.add_widget(self.patient_page)
+        self.screen_manager.add_widget(screen)
+
+        self.info_page = InfoPage()
+        screen = Screen(name="Info")
+        screen.add_widget(self.info_page)
         self.screen_manager.add_widget(screen)
 
         return self.screen_manager
